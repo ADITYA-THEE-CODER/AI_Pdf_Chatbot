@@ -15,3 +15,6 @@ if uploaded_file is not None:
         text += page.extract_text()
 
     option = st.selectbox("Choose Action", ["Summary", "Ask Question"])
+
+    if option == "Summary":
+        lines = st.slider("How many lines of summary?", 1, 10, 3)
