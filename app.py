@@ -14,5 +14,5 @@ if uploaded_file is not None:
     for page in reader.pages:
         text += page.extract_text()
 
-    st.text_area("Extracted Text", text[:2000], height=300)
+    option = st.selectbox("Choose Action", ["Summary", "Ask Question"])
     question = st.text_input("Ask a question about the PDF")
