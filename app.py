@@ -15,4 +15,3 @@ if uploaded_file is not None:
         text += page.extract_text()
 
     option = st.selectbox("Choose Action", ["Summary", "Ask Question"])
-    question = st.text_input("Ask a question about the PDF")
