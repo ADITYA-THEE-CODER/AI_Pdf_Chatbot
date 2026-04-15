@@ -19,7 +19,9 @@ if uploaded_file is not None:
     if option == "Summary":
         lines = st.number_input("Enter number of summary lines", min_value=1, max_value=200, value=20, step=1)
         st.subheader("Summary")
-        st.write(text[:lines * 200])
+        summary = text[:lines * 200].split(".")
+        for line in summary[:lines]:
+            st.write("•", line)
     
     elif option == "Ask Question":
         question = st.text_input("What question do you want to ask?")
