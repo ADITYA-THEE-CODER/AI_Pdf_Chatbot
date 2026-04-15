@@ -25,3 +25,4 @@ if uploaded_file is not None:
     
     elif option == "Ask Question":
         question = st.text_input("What question do you want to ask?")
+
