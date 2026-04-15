@@ -18,6 +18,8 @@ if uploaded_file is not None:
 
     if option == "Summary":
         lines = st.slider("How many lines of summary?", 5, 100, 20)
+        st.subheader("Summary")
+        st.write(text[:lines * 200])
     
     elif option == "Ask Question":
         question = st.text_input("What question do you want to ask?")
