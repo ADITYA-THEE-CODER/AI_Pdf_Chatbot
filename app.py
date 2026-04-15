@@ -17,7 +17,7 @@ if uploaded_file is not None:
     option = st.selectbox("Choose Action", ["Summary", "Ask Question"])
 
     if option == "Summary":
-        lines = st.slider("How many lines of summary?", 1, 10, 3)
-        
+        lines = st.slider("How many lines of summary?", 5, 100, 20)
+    
     elif option == "Ask Question":
         question = st.text_input("What question do you want to ask?")
