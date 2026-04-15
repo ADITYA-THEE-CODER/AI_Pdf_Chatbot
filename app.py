@@ -15,3 +15,4 @@ if uploaded_file is not None:
         text += page.extract_text()
 
     st.text_area("Extracted Text", text[:2000], height=300)
+    question = st.text_input("Ask a question about the PDF")
