@@ -17,7 +17,7 @@ if uploaded_file is not None:
     option = st.selectbox("Choose Action", ["Summary", "Ask Question"])
 
     if option == "Summary":
-        lines = st.slider("How many lines of summary?", 5, 100, 20)
+        lines = st.number_input("Enter number of summary lines", min_value=1, max_value=200, value=20, step=1)
         st.subheader("Summary")
         st.write(text[:lines * 200])
     
