@@ -10,3 +10,8 @@ if uploaded_file is not None:
     st.write("PDF uploaded successfully!")
     reader = PdfReader(uploaded_file)
     text = ""
+
+    for page in reader.pages:
+        text += page.extract_text()
+
+    st.write(text[:1000])
