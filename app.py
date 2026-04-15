@@ -14,4 +14,4 @@ if uploaded_file is not None:
     for page in reader.pages:
         text += page.extract_text()
 
-    st.write(text[:1000])
+    st.text_area("Extracted Text", text[:2000], height=300)
