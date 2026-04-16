@@ -5,7 +5,7 @@ from groq import Groq
 st.set_page_config(page_title="AI PDF Chatbot", page_icon="📄")
 
 st.title("📄 AI PDF CHATBOT")
-st.write("Upload your PDF and ask smart questions using Groq AI.")
+st.write("Upload your PDF and ask your Queries.")
 
 # SECRET API KEY
 api_key = st.secrets["GROQ_API_KEY"]
