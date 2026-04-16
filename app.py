@@ -24,7 +24,15 @@ if api_key and uploaded_file is not None:
         if page_text:
             text += page_text + "\n"
 
-    # LIMIT TEXT SIZE (important fix)
+    # DEBUG PREVIEW (optional)
+    # st.write(text[:1000])
+
+    # CHECK IF TEXT EXISTS
+    if text.strip() == "":
+        st.error("No readable text found in this PDF. Try another PDF.")
+        st.stop()
+
+    # LIMIT TEXT SIZE
     short_text = text[:6000]
 
     st.success("PDF uploaded successfully!")
@@ -46,18 +54,21 @@ if api_key and uploaded_file is not None:
                     prompt = f"""
                     Summarize the following PDF in {lines} clear bullet points.
 
+                    Keep it simple and useful.
+
                     PDF Content:
                     {short_text}
                     """
 
                     response = client.chat.completions.create(
-                        model="llama-3.1-8b-instant" ,
+                        model="llama-3.1-8b-instant",
                         messages=[
                             {"role": "user", "content": prompt}
                         ]
                     )
 
                     answer = response.choices[0].message.content
+
                     st.subheader("Summary")
                     st.write(answer)
 
@@ -73,7 +84,9 @@ if api_key and uploaded_file is not None:
             with st.spinner("Thinking..."):
                 try:
                     prompt = f"""
-                    Use the PDF content below to answer the user's question.
+                    Answer the user's question ONLY using the PDF content below.
+                    If the answer is not in the PDF, say:
+                    "I could not find that in the PDF."
 
                     PDF Content:
                     {short_text}
@@ -90,6 +103,7 @@ if api_key and uploaded_file is not None:
                     )
 
                     answer = response.choices[0].message.content
+
                     st.subheader("Answer")
                     st.write(answer)
 
