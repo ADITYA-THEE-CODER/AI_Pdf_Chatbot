@@ -8,7 +8,7 @@ st.title("📄 AI PDF CHATBOT")
 st.write("Upload your PDF and ask smart questions using Groq AI.")
 
 # API KEY
-api_key = st.text_input("Enter Groq API Key", type="password")
+api_key = st.secrets["GROQ_API_KEY"]
 
 uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 
