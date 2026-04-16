@@ -1,13 +1,20 @@
 import streamlit as st
 from pypdf import PdfReader
+from groq import Groq
 
-st.title("AI PDF CHATBOT")
-st.write("Upload your PDF here.")
+st.set_page_config(page_title="AI PDF Chatbot", page_icon="📄")
+
+st.title("📄 AI PDF CHATBOT")
+st.write("Upload your PDF and ask smart questions using Groq AI.")
+
+# API KEY
+api_key = st.text_input("Enter Groq API Key", type="password")
 
 uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 
-if uploaded_file is not None:
-    st.write("PDF uploaded successfully!")
+if api_key and uploaded_file is not None:
+
+    client = Groq(api_key=api_key)
 
     reader = PdfReader(uploaded_file)
     text = ""
@@ -17,41 +24,64 @@ if uploaded_file is not None:
         if page_text:
             text += page_text + "\n"
 
+    st.success("PDF uploaded successfully!")
+
     option = st.selectbox("Choose Action", ["Summary", "Ask Question"])
 
-    # SUMMARY FEATURE
+    # SUMMARY
     if option == "Summary":
         lines = st.number_input(
-            "Enter number of summary lines",
+            "Enter summary length (lines)",
             min_value=1,
-            max_value=200,
-            value=20,
-            step=1
+            max_value=50,
+            value=10
         )
 
         if st.button("Generate Summary"):
-            st.subheader("Summary")
+            with st.spinner("Generating summary..."):
 
-            summary_lines = text.split("\n")
+                prompt = f"""
+                Summarize the following PDF in {lines} clear bullet points.
 
-            for line in summary_lines[:lines]:
-                if line.strip() != "":
-                    st.write("•", line)
+                PDF Content:
+                {text}
+                """
 
-    # ASK QUESTION FEATURE
+                response = client.chat.completions.create(
+                    model="llama3-70b-8192",
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+
+                answer = response.choices[0].message.content
+                st.subheader("Summary")
+                st.write(answer)
+
+    # ASK QUESTION
     elif option == "Ask Question":
-        question = st.text_input("What question do you want to ask?")
+        question = st.text_input("Ask something from the PDF")
 
-        if question:
-            st.subheader("Answer")
+        if st.button("Get Answer"):
+            with st.spinner("Thinking..."):
 
-            sentences = text.split(".")
-            found = False
+                prompt = f"""
+                Use the PDF content below to answer the user's question.
 
-            for sentence in sentences:
-                if question.lower() in sentence.lower():
-                    st.write("•", sentence.strip())
-                    found = True
+                PDF Content:
+                {text}
 
-            if not found:
-                st.warning("No relevant answer found in the PDF.")
+                Question:
+                {question}
+                """
+
+                response = client.chat.completions.create(
+                    model="llama3-70b-8192",
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+
+                answer = response.choices[0].message.content
+                st.subheader("Answer")
+                st.write(answer)
