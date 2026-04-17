@@ -8,84 +8,43 @@ st.set_page_config(page_title="AI PDF Chatbot", page_icon="📄", layout="center
 st.markdown("""
 <style>
 
-/* Full app background */
+/* Background */
 .stApp {
     background: linear-gradient(135deg, #0b1020, #2b1055, #1f3b73, #000000);
     background-attachment: fixed;
 }
 
-/* Top header bar */
-header {
-    background: linear-gradient(135deg, #0b1020, #2b1055, #1f3b73, #000000) !important;
-}
-
-/* Streamlit top header container */
-[data-testid="stHeader"] {
-    background: linear-gradient(135deg, #0b1020, #2b1055, #1f3b73, #000000) !important;
-}
-
-/* Main section transparent */
-section.main {
-    background: transparent !important;
-}
-
-/* Main content width + spacing */
-.block-container {
-    padding-top: 2rem;
-    max-width: 850px;
+/* Main content card */
+.main-wrapper {
+    max-width: 900px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 30px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
 }
 
 /* Title */
 .main-title {
     text-align: center;
-    font-size: 48px;
+    font-size: 46px;
     font-weight: 800;
     color: #D8C3A5;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 /* Subtitle */
 .sub-text {
     text-align: center;
-    font-size: 18px;
-    color: #e8e8e8;
-    margin-bottom: 30px;
-}
-
-/* File uploader box */
-[data-testid="stFileUploader"] {
-    background: rgba(255,255,255,0.06);
-    padding: 18px;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.12);
-}
-
-/* Buttons */
-.stButton > button {
-    width: 100%;
-    border-radius: 12px;
-    height: 48px;
-    font-size: 17px;
-    font-weight: 600;
-    background: linear-gradient(90deg, #3a0ca3, #4361ee);
-    color: white;
-    border: none;
-}
-
-/* Inputs */
-.stTextInput input,
-.stNumberInput input,
-.stSelectbox div[data-baseweb="select"] {
-    border-radius: 12px !important;
-}
-
-/* Success / alert boxes */
-[data-testid="stAlert"] {
-    border-radius: 14px;
+    color: #f0f0f0;
+    margin-bottom: 25px;
 }
 
 </style>
 """, unsafe_allow_html=True)
+
 # CUSTOM TITLE
 st.markdown('<div class="main-title">📄 AI PDF CHATBOT</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-text">Upload your PDF and ask your queries.</div>', unsafe_allow_html=True)
