@@ -14,6 +14,21 @@ st.markdown("""
     background-attachment: fixed;
 }
 
+/* Top header bar */
+header {
+    background: linear-gradient(135deg, #0b1020, #2b1055, #1f3b73, #000000) !important;
+}
+
+/* Streamlit top header container */
+[data-testid="stHeader"] {
+    background: linear-gradient(135deg, #0b1020, #2b1055, #1f3b73, #000000) !important;
+}
+
+/* Main section transparent */
+section.main {
+    background: transparent !important;
+}
+
 /* Main content width + spacing */
 .block-container {
     padding-top: 2rem;
@@ -58,7 +73,9 @@ st.markdown("""
 }
 
 /* Inputs */
-.stTextInput input, .stNumberInput input, .stSelectbox div[data-baseweb="select"] {
+.stTextInput input,
+.stNumberInput input,
+.stSelectbox div[data-baseweb="select"] {
     border-radius: 12px !important;
 }
 
@@ -69,7 +86,6 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
-
 # CUSTOM TITLE
 st.markdown('<div class="main-title">📄 AI PDF CHATBOT</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-text">Upload your PDF and ask your queries.</div>', unsafe_allow_html=True)
