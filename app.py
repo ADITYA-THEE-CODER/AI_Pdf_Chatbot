@@ -8,27 +8,63 @@ st.set_page_config(page_title="AI PDF Chatbot", page_icon="📄", layout="center
 st.markdown("""
 <style>
 
-/* Full Background */
+/* Full app background */
 .stApp {
-    background: linear-gradient(135deg, #1a1a40, #3a0ca3, #4361ee, #000000);
+    background: linear-gradient(135deg, #0b1020, #2b1055, #1f3b73, #000000);
     background-attachment: fixed;
 }
 
-/* Main Title */
+/* Main content width + spacing */
+.block-container {
+    padding-top: 2rem;
+    max-width: 850px;
+}
+
+/* Title */
 .main-title {
     text-align: center;
-    font-size: 42px;
-    font-weight: bold;
+    font-size: 48px;
+    font-weight: 800;
     color: #D8C3A5;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 /* Subtitle */
 .sub-text {
     text-align: center;
     font-size: 18px;
+    color: #e8e8e8;
+    margin-bottom: 30px;
+}
+
+/* File uploader box */
+[data-testid="stFileUploader"] {
+    background: rgba(255,255,255,0.06);
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Buttons */
+.stButton > button {
+    width: 100%;
+    border-radius: 12px;
+    height: 48px;
+    font-size: 17px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #3a0ca3, #4361ee);
     color: white;
-    margin-bottom: 25px;
+    border: none;
+}
+
+/* Inputs */
+.stTextInput input, .stNumberInput input, .stSelectbox div[data-baseweb="select"] {
+    border-radius: 12px !important;
+}
+
+/* Success / alert boxes */
+[data-testid="stAlert"] {
+    border-radius: 14px;
 }
 
 </style>
