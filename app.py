@@ -2,10 +2,41 @@ import streamlit as st
 from pypdf import PdfReader
 from groq import Groq
 
-st.set_page_config(page_title="AI PDF Chatbot", page_icon="📄")
+st.set_page_config(page_title="AI PDF Chatbot", page_icon="📄", layout="centered")
 
-st.title("📄 AI PDF CHATBOT")
-st.write("Upload your PDF and ask your Queries.")
+# CUSTOM UI DESIGN
+st.markdown("""
+<style>
+
+/* Full Background */
+.stApp {
+    background: linear-gradient(135deg, #1a1a40, #3a0ca3, #4361ee, #000000);
+    background-attachment: fixed;
+}
+
+/* Main Title */
+.main-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    color: #D8C3A5;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.sub-text {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# CUSTOM TITLE
+st.markdown('<div class="main-title">📄 AI PDF CHATBOT</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-text">Upload your PDF and ask your queries.</div>', unsafe_allow_html=True)
 
 # SECRET API KEY
 api_key = st.secrets["GROQ_API_KEY"]
@@ -24,9 +55,6 @@ if api_key and uploaded_file is not None:
         if page_text:
             text += page_text + "\n"
 
-    # DEBUG PREVIEW (optional)
-    # st.write(text[:1000])
-
     # CHECK IF TEXT EXISTS
     if text.strip() == "":
         st.error("No readable text found in this PDF. Try another PDF.")
@@ -41,6 +69,7 @@ if api_key and uploaded_file is not None:
 
     # SUMMARY
     if option == "Summary":
+
         lines = st.number_input(
             "Enter summary length (lines)",
             min_value=1,
@@ -50,10 +79,10 @@ if api_key and uploaded_file is not None:
 
         if st.button("Generate Summary"):
             with st.spinner("Generating summary..."):
+
                 try:
                     prompt = f"""
                     Summarize the following PDF in {lines} clear bullet points.
-
                     Keep it simple and useful.
 
                     PDF Content:
@@ -76,12 +105,14 @@ if api_key and uploaded_file is not None:
                     st.error("Error while generating summary.")
                     st.write(e)
 
-    # ASK QUESTION
+    # QUESTION MODE
     elif option == "Ask Question":
+
         question = st.text_input("Ask something from the PDF")
 
         if st.button("Get Answer"):
             with st.spinner("Thinking..."):
+
                 try:
                     prompt = f"""
                     Answer the user's question ONLY using the PDF content below.
